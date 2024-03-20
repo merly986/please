@@ -1,30 +1,64 @@
-# React + TypeScript + Vite
+# README
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Используемый стек проекта указан в файле package.json.
 
-Currently, two official plugins are available:
+# Краткое описание стека
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    react - основной фреймворк проекта;
+    react-router-dom - пакет для маршрутизации в React-приложениях;
+    react-redux - официальная библиотека для интеграции Redux с React;
+    react-input-mask - компонент React для создания масок ввода;
+    redux - библиотека для управления состоянием приложения в JavaScript-приложениях;
+    reduxjs/toolkit - упрощает использование Redux;
+    axios - библиотека для выполнения HTTP-запросов из JavaScript-приложений;
+    mui - библиотека компонентов пользовательского интерфейса (UI) для React;
+    mui/icons - набор иконок.
 
-## Expanding the ESLint configuration
+В проекте мы не используем Bootstrap, другие глобальные стили и css фреймворки.
+Пользуемся темой MUI.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Роутинг будет указан в файле src/App.tsx.
 
-- Configure the top-level `parserOptions` property like this:
+Типы для TypeScript указываем в папке src/Types. Все поля типов указывайте через `?`, для удобства обновления состояний.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Если ваши компоненты взаимодействуют с другими - передачу данных и состояний делаем через Redux.
+Для этого в папке src/store добавляем новое хранилище или состояния внутрь существующих (на данный момент их нет).
+
+Для удобства работы с авторизацией используем axios, 
+т.к. он дает возможность дописывать заголовки для всех запросов приложения и в целом более удобный:
+
+```javascript
+// Создаем перехватчик запроса
+axios.interceptors.request.use(config => {
+  // Получаем токен авторизации из localStorage
+  const token = localStorage.getItem('token');
+  // Если токен существует, добавляем его в заголовок Authorization
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  // Возвращаем конфигурацию, чтобы запрос продолжился
+  return config;
+}, error => {
+  // Обработка ошибок при добавлении перехватчика
+  return Promise.reject(error);
+});
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Локальная сборка проекта
+
+Внутри папки please_front используйте команду:
+
+```bash
+npm install
+```
+
+## Запуск проекта
+
+Скрипты запуска указаны внутри package.json. Основной сценарий использования - `dev`.
+Внутри папки please_front используйте команду:
+
+```bash
+npm run dev
+```
+
+Данный ReadMe будет дополняться по мере доработки проекта.
