@@ -29,17 +29,11 @@
       "@/*": [
         "./src/*"
       ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@pages/*": [
-        "./src/pages/*"
-      ],
       "@store/*": [
         "./src/store/*"
+      ],
+      "@types/*": [
+        "./src/types/*"
       ]
     }
   },
