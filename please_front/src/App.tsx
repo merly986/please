@@ -1,41 +1,39 @@
-import { useState } from 'react';
-//import { useDispatch } from 'react-redux';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { lime, purple } from '@mui/material/colors';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { setHomeLink } from "@store/common.ts";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css'
-import Index from "@/pages/index.tsx"
+import "./App.css";
+import Index from "@/pages/index.tsx";
+import CandidateInfo from "@/pages/candidate.tsx";
+import { useDispatch } from "react-redux";
+import { lime, purple } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
     primary: lime,
     secondary: purple,
   },
-})
+});
 
 function App() {
-  // const dispatch = useDispatch();
-  // const [count, setCount] = useState(0)
+  const dispatch = useDispatch();
 
-  if (location.origin.includes("localhost")){
-    // dispatch(setHomeLink("http://localhost:443"));
+  if (location.origin.includes("localhost")) {
+    dispatch(setHomeLink("http://localhost:443"));
   } else {
     // Можно добавить другие origin
     // Если приложуха - часть домена можно забить prefix
-  } 
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path={"/"} element=<Index/> />
+          <Route path={"/"} element={<Index />} />
+          <Route path={"/candidate/"} element=<CandidateInfo /> />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
-  )
+  );
 }
 
 export default App;
