@@ -2,8 +2,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { setHomeLink } from "@store/common.ts";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Index from "@/pages/index.tsx";
-import CandidateInfo from "@/pages/candidate.tsx";
+import Index from "@/pages/";
+import CandidateInfo from "@/pages/candidate/";
 import { useDispatch } from "react-redux";
 import { lime, purple } from "@mui/material/colors";
 
@@ -28,8 +28,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
+          <Route path={"/candidate/:candidateId"} element={<CandidateInfo />} />
           <Route path={"/"} element={<Index />} />
-          <Route path={"/candidate/"} element=<CandidateInfo /> />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
