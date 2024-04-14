@@ -3,7 +3,7 @@ import { setHomeLink } from "@store/common.ts";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Index from "@/pages/";
-import CandidateInfo from "@/pages/candidate/";
+import CandidateInfo from "@/pages/candidate/CandidateInfo.tsx";
 import { useDispatch } from "react-redux";
 import { lime, purple } from "@mui/material/colors";
 

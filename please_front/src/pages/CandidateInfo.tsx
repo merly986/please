@@ -2,7 +2,7 @@ import avatar from "/avatar.png";
 import { Avatar } from "@mui/material";
 import { Box, Grid, Typography, Chip, Stack, Button, ButtonGroup, Divider, TextField } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { CallEnd, Email } from '@mui/icons-material';
+import { CallEnd, Email, Edit } from '@mui/icons-material';
 
 const candidate = {
   firstName: "Иван",
@@ -37,7 +37,7 @@ function CandidateInfo () {
 	  <Avatar
 	    src={candidate.foto}
 	    alt="Фото"
-	    sx={{height: 125, width: 120}}
+	    sx={{height: 160, width: 120}}
 	    variant="square"
 	  />          
         </Grid>
@@ -46,18 +46,21 @@ function CandidateInfo () {
             <Typography variant="h4">{candidate.lastName}</Typography>
             <Typography variant="h5">{candidate.firstName}</Typography>
             <Typography variant="h5">{candidate.middleName}</Typography>
-            <Typography variant="caption">Дата рождения: {candidate.birthday}</Typography>
+            <Typography variant="caption" sx={{display: "block"}}>Дата рождения: {candidate.birthday}</Typography>
+            <Button size="small" startIcon={<Edit />}>Изменить персональные данные</Button>
           </div>
         </Grid>
         <Grid item sm={12} md={3}>
           <Stack spacing={1}>
             <Chip icon={<CallEnd />} label={candidate.phone} variant="outlined" />
             <Chip icon={<Email />} label={candidate.email} variant="outlined" />
-            <Typography variant="caption">Дата поступления резюме: { candidate.resumeDate }</Typography>
+            <Button size="small"  startIcon={<Edit />}>Изменить контактные данные</Button>
           </Stack>
         </Grid>
         <Grid item sm={12} md={12}>
-          <Divider />
+          <Divider sx={{mb: 1}}/>
+          <Typography variant="h5" sx={{display: "inline", mr: 3}}>Общая информация</Typography>
+          <Button size="small" startIcon={<Edit />}>Редактировать</Button>
           <Grid container spacing={2}>
             <Grid item sm={12} md={7}>
               <TextField sx={{mt: 2}}
@@ -97,6 +100,14 @@ function CandidateInfo () {
             <Grid item sm={12} md={5}>
               <TextField sx={{mt: 2}}
                 fullWidth
+                label="Дата поступления резюме"
+                defaultValue={ candidate.resumeDate }
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+              <TextField sx={{mt: 2}}
+                fullWidth
                 label="Признак резюме"
                 defaultValue="годное"
                 InputProps={{
@@ -134,7 +145,7 @@ function CandidateInfo () {
           <TextField sx={{mt: 2}}
             fullWidth
             label="Комментарии"
-            defaultValue=""
+            defaultValue="..."
             InputProps={{
               readOnly: true,
             }}
