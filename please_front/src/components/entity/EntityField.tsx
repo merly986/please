@@ -1,4 +1,5 @@
-import { Box, Grid, Typography, Chip, Stack, Button, ButtonGroup, Divider, TextField } from "@mui/material";
+import { Box, Grid, Typography, Chip, Stack, Button, ButtonGroup, Divider, TextField, FormControlLabel, Checkbox } from '@mui/material';
+import { dateToMUI } from '@/utils/utils';
 
 
 export default function EntityField ({attribute}) {
@@ -7,18 +8,52 @@ export default function EntityField ({attribute}) {
   const entityAttrValue = attribute?.entity_attr_value;
   
   const readOnly = {
-    readOnly: false
+    readOnly: attribute?.read_only || false
   };
-
   
   switch(rAttrType) {
     case 'date':
-      return <TextField InputProps={
-            readOnly
-          } label={rAttrLabel} defaultValue={entityAttrValue} />;
+      return (
+        <TextField
+          size='small'
+          variant='standard'
+          type='date'
+          sx={{ display: 'block', my: 2 }}
+          InputProps={readOnly}
+          label={rAttrLabel}
+          defaultValue={dateToMUI(entityAttrValue)}
+        />
+      );
       break;
-    default:
-      return <TextField sx={{display: "block", m: 2}} label={rAttrLabel} defaultValue={entityAttrValue}/ >;
+    case 'string':
+      return (
+        <TextField
+          size='small'
+          variant='standard'
+          sx={{display: 'block', my: 2 }}
+          label={rAttrLabel}
+          defaultValue={entityAttrValue}
+          InputProps={readOnly}
+        />
+      );
+      break;
+    case 'longstring':
+      return (
+        <TextField
+          multiline
+          fullWidth
+          maxRows={4}
+          size='small'
+          variant='standard'
+          sx={{display: 'block', my: 2 }}
+          label={rAttrLabel}
+          defaultValue={entityAttrValue}
+          InputProps={readOnly}
+        />
+      );
+      break;
+    case 'bool':
+      return <FormControlLabel control={<Checkbox defaultChecked={entityAttrValue} InputProps={readOnly} />} label={rAttrLabel} />
       break;
   };
 };
