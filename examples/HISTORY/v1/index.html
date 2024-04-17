@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang=""ru">
+<head>
+  <meta charset="utf-8"/>
+  <title>История изменений </title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+  <style>
+        .parent > div {
+          background: #8ec2d6;
+          float: left;
+          margin-right: 2%;
+          padding: 10px;
+          border: 1px solid #4e68fd;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+        }
+        #all_information {
+          overflow-y:scroll;
+          overflow-x:scroll;
+        }
+        #mynetwork {
+            width: 800px;
+            height: 800px;
+            border: 1px solid #4e68fd;
+        }
+        table, td,th {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+<div class=""parent">
+    <div id="mynetwork">
+    <div id="all_information">
+</div>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+<script>
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+        {id: 1, label: 'Вакансия'},
+        {id: 2, label: 'Приём на работу'},
+        {id: 3, label: 'Рассмотрение'},
+        {id: 4, label: 'Резюме'},
+        {id: 5, label: 'Сбор документов'},
+        {id: 6, label: 'Банк кандидатов'},
+        {id: 7, label: 'Проверка ФСБ'},
+        {id: 8, label: 'Мед.Комиссия'},
+        {id: 9, label: 'Документы отдела'},
+        {id: 10, label: 'Трудоустройство' }
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+        {from: 4, to: 3},
+        {from: 1, to: 4},
+        {from: 2, to: 5},
+        {from:3, to: 6},
+        {from:7, to: 8},
+        {from:5, to: 7},
+        {from:7, to: 9},
+        {from:8, to: 10},
+        {from:9, to: 10}
+    ]);
+
+    //create a network
+    var container = document.getElementById('mynetwork');
+
+    // provide the data in the vis format
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {
+      nodes: {
+        shape: 'box',
+        shadow: {
+      enabled: true,
+      color: 'rgba(0,0,0,0.5)',
+      size:10,
+      x:5,
+      y:5,
+        }
+      },
+      edges:{
+        shadow:{
+      enabled: true,
+      color: 'rgba(0,0,0,0.5)',
+      size:10,
+      x:5,
+      y:5,
+    },
+    arrows: {
+      to: {
+        enabled: true}}},
+      layout: {
+    randomSeed: undefined,
+    improvedLayout:true,
+    clusterThreshold: 150,
+    hierarchical: {
+      enabled:true,
+      sortMethod: 'directed',  // hubsize, directed
+    },
+    "physics":{
+        "barnesHut":{
+          "gravitationalConstant": -4000,
+          "springConstant": 0.006,
+          "damping":0.02
+        },
+        "repulsion":{"nodeDistance":300}
+      }
+    }
+  };
+ // initialize your network!
+  var network = new vis.Network(container, data, options);
+  var res_container = document.getElementById('all_information');
+
+    network.on( 'click', function(properties) {
+    var clickedNodes = nodes.get(properties.nodes);
+    var clickedEdges = edges.get(properties.edges);
+    //определение типа объекта (вершина/ребро) на котором произошло событие
+    var clickedObject = clickedNodes.length==0 ? clickedEdges[0] : clickedNodes[0];
+    var count_by_timeperiod = clickedObject['count_by_timeperiod'];
+
+    var cbp_labels = Object.keys(count_by_timeperiod); // total sum by timeperiod
+    var cbp_values = Object.values(count_by_timeperiod);
+    showChart('myChart', cbp_labels, cbp_values, "Длительность исполнения ");
+});
+function showChart(canvas_id, labels_list, values_list, legend){
+  //удаляем элемент, чтобы очистить контекст
+  var elem = document.getElementById(canvas_id);
+  if (elem!=null){
+    elem.remove(elem);
+  }
+  //создаём элемент заново, чтобы забрать контекст заново
+  let canvas = document.createElement('canvas');
+  canvas.setAttribute('id',canvas_id);
+  canvas.style.width = "500px";
+  canvas.style.height = "300px";
+  res_container.append(canvas);
+  var element = document.getElementById(canvas_id);
+  var ctx = element.getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels_list,
+        datasets: [{
+            label: legend,
+            data: values_list,
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive:false,
+        legend: {display: false},
+        title: {
+            display: true,
+            text: legend,
+            position: 'top',
+            fontSize: 16,
+            padding: 0
+        },
+        scales: {
+            yAxes: [{ticks: {min: 0}}]
+        }
+    }
+});
+}
+</script>
+</body>
+</html>
