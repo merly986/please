@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { authorize } from "../utils/auth";
 import { Box, Button, Checkbox, Container, CssBaseline, FormControlLabel, Grid, Link, TextField, Typography } from "@mui/material";
 
-function Login({ handleLogin }) {
+function Login({ handleLogin, onError }) {
   const [formValue, setFormValue] = useState({
     password: "",
     email: "",
@@ -36,7 +36,9 @@ function Login({ handleLogin }) {
         }
       })
       .catch((err) => {
+        onError(true);
         console.log(err);
+
       });
   };
 

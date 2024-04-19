@@ -9,6 +9,7 @@ import * as auth from "./utils/auth";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { lime, purple } from '@mui/material/colors';
 import UserProfile from "./components/UserProfile";
+import { Alert, Snackbar } from "@mui/material";
 
 
 const theme = createTheme({
@@ -24,18 +25,14 @@ const theme = createTheme({
 
 
 function App() {
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [isError, setIsError] = useState(false);
-
-  const [cards, setCards] = useState([]);
-  const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
 
   const user = {
@@ -46,10 +43,6 @@ function App() {
     photo: "https://picsum.photos/200/200"
   };
 
-  function closeAllPopups() {
-    setIsTooltipOpen(false);
-
-  }
 
   function signOut() {
     localStorage.removeItem("token");
@@ -64,6 +57,11 @@ function App() {
   useEffect(() => {
     checkTokenValidity();
   }, []);
+
+  const handleError = (message) => {
+    setErrorMessage(message);
+    setIsError(true);
+  };
 
   function checkTokenValidity() {
     const token = localStorage.getItem("token");
@@ -102,7 +100,7 @@ function App() {
             element={
               <Register
                 openInfoTooltip={setIsTooltipOpen}
-                onError={setIsError}
+                onError={handleError}
 
               />
             }
@@ -112,12 +110,22 @@ function App() {
             element={
               <Login
                 handleLogin={handleLogin}
+                onError={handleError}
+
               />
             }
           />
         </Routes>
         <Header loggedIn={loggedIn} email={email} onSignOut={signOut} />
-
+        <Snackbar
+          open={isError}
+          autoHideDuration={6000}
+          onClose={() => setIsError(false)}
+        >
+          <Alert severity="error" onClose={() => setIsError(false)}>
+            Произошла ошибка: {errorMessage}
+          </Alert>
+        </Snackbar>
 
       </CurrentUserContext.Provider>
     </ThemeProvider>
