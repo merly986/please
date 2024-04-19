@@ -1,0 +1,27 @@
+.app-wrapper{
+	display: grid;
+	margin: 0 auto;
+
+	max-width: 1200px;
+
+	grid-template-areas:
+	"app-header app-header"
+	"app-navigation app-content";
+
+	grid-template-rows: 100px 1fr;
+	grid-template-columns: 2fr 10fr;
+	gap: 8px;
+
+  }
+
+  .app-header{
+	grid-area: app-header;
+  }
+
+  .app-navigation{
+	grid-area: app-navigation;
+  }
+
+  .app-content{
+	grid-area: app-content;
+  }
