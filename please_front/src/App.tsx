@@ -22,8 +22,8 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path={"/:rEntityTypeName/:entityID"} element={<EntityDetail />} />
-          <Route path={"/candidat/:candidateId"} element={<CandidateInfo />} />
+          <Route path="/entity" element={<EntityDetail />} />
+          <Route path="/:rEntityTypeName/:entityID" element={<EntityDetail />} />
           <Route path={"/"} element={<Index />} />
         </Routes>
       </BrowserRouter>

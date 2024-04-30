@@ -22,6 +22,14 @@ function getEntity(rEntityTypeName, entityID) {
           'entity_attr_value': 'Иванов'
         },
         {
+          'entity_attr_id': '783',
+          'rattr_type': 'string',
+          'rattr_name': 'first_name',
+          'rattr_label': 'Имя',
+          'rattr_view': null,
+          'entity_attr_value': 'Василий'
+        },
+        {
           'entity_attr_id': '774',
           'rattr_type': 'bool',
           'rattr_name': 'resume',
@@ -80,7 +88,7 @@ function getEntity(rEntityTypeName, entityID) {
       ]
     },  
   ];
-  return data.find(elem => elem?.rentity_type_name == rEntityTypeName && elem?.entity_id == entityID);
+  return data.find(elem => elem?.entity_id == entityID);
 };
 
 function dateToMUI(dateString) {

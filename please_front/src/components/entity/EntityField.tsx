@@ -6,11 +6,12 @@ export default function EntityField ({attribute}) {
   const rAttrLabel = attribute?.rattr_label;
   const rAttrType = attribute?.rattr_type;
   const entityAttrValue = attribute?.entity_attr_value;
-  
+  const rattrName = attribute?.rattr_name
+
   const readOnly = {
     readOnly: attribute?.read_only || false
   };
-  
+
   switch(rAttrType) {
     case 'date':
       return (
@@ -22,6 +23,7 @@ export default function EntityField ({attribute}) {
           InputProps={readOnly}
           label={rAttrLabel}
           defaultValue={dateToMUI(entityAttrValue)}
+          name={rattrName}
         />
       );
       break;
@@ -34,6 +36,7 @@ export default function EntityField ({attribute}) {
           label={rAttrLabel}
           defaultValue={entityAttrValue}
           InputProps={readOnly}
+          name={rattrName}
         />
       );
       break;
@@ -49,11 +52,12 @@ export default function EntityField ({attribute}) {
           label={rAttrLabel}
           defaultValue={entityAttrValue}
           InputProps={readOnly}
+          name={rattrName}
         />
       );
       break;
     case 'bool':
-      return <FormControlLabel control={<Checkbox defaultChecked={entityAttrValue} InputProps={readOnly} />} label={rAttrLabel} />
+      return <FormControlLabel control={<Checkbox defaultChecked={entityAttrValue} name={rattrName} />} label={rAttrLabel} />
       break;
   };
 };
