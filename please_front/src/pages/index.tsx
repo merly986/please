@@ -1,12 +1,17 @@
 import reactLogo from "@/assets/react.svg";
 import viteLogo from "/vite.svg";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
+  const navigate = useNavigate();
 
   return (
+    <button onClick={() => navigate("/entity", {state: {id: 83}})}>
+      Open entity
+    </button>
+/*
     <>
       <div>
         <a href="https://vitejs.dev" target="_blank">
@@ -29,6 +34,7 @@ const Index = () => {
         Click on the Vite and React logos to learn more
       </p>
     </>
+*/
   );
 };
 
