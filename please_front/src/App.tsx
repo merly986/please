@@ -23,7 +23,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/entity" element={<EntityDetail />} />
-          <Route path="/:rEntityTypeName/:entityID" element={<EntityDetail />} />
           <Route path={"/"} element={<Index />} />
         </Routes>
       </BrowserRouter>

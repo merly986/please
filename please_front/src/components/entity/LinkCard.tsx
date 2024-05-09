@@ -6,7 +6,7 @@ export default function LinkCard ({attribute}) {
   const navigate = useNavigate();
 
   function handleOnClick() {
-    return navigate("/entity", {state: {id: attribute?.entity_id}});
+    return navigate("/entity", {state: {type: attribute?.rentity_type_name, id: attribute?.entity_id}});
   };
 
   return (

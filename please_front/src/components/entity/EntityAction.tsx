@@ -13,8 +13,8 @@ export default function EntityAction({entityID, rentityTypeName}) {
   const [showSpeedDeal, setShowSpeedDeal] = useState(false);
 
   function handleDeleteButton() {
-    setShowSpeedDeal(false);
     setShowConfirmDelete(true);
+    console.log('delete!');
   };
 
   const actions = [
@@ -25,21 +25,16 @@ export default function EntityAction({entityID, rentityTypeName}) {
 
   function deleteEntity() {
     // let entityForm = new FormData(document.getElementById('formEntityDetail'));
-    // console.log(entityID);
+    console.log('Delete ', entityID);
   };
   
 
   function saveEntity() {
-    console.log(entityID);
+    console.log('Save ', entityID);
   };
 
   function goToEntityList() {
     console.log(rentityTypeName);
-  };
-
-  function handleCloseConfirmDelete() {
-    // setShowSpeedDeal(false);
-    setShowConfirmDelete(false);
   };
 
   return (

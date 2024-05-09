@@ -92,7 +92,9 @@ function getEntity(rEntityTypeName, entityID) {
 };
 
 function dateToMUI(dateString) {
-  return dateString.split('.').reverse().join('-');
+  if (dateString) {
+    return dateString.split('.').reverse().join('-');
+  };
 };
 
 export { dateToMUI, getEntity }

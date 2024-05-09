@@ -8,7 +8,7 @@ const Index = () => {
   const navigate = useNavigate();
 
   return (
-    <button onClick={() => navigate("/entity", {state: {id: 83}})}>
+    <button onClick={() => navigate("/entity", {state: {type: 'request', id: 86}})}>
       Open entity
     </button>
 /*
