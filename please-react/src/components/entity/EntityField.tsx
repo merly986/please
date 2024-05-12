@@ -1,4 +1,5 @@
-import { Box, Grid, Typography, Chip, Stack, Button, ButtonGroup, Divider, TextField, FormControlLabel, Checkbox } from '@mui/material';
+import { FormControl, InputLabel, Box, Grid, Typography, Chip, Stack, Button, ButtonGroup, Divider, TextField, FormControlLabel, Checkbox } from '@mui/material';
+import InputBase from '@mui/material';
 import { dateToMUI } from '../../utils/utils';
 
 
@@ -17,13 +18,14 @@ export default function EntityField ({attribute}) {
       return (
         <TextField
           size='small'
-          variant='standard'
           type='date'
-          sx={{ display: 'block', my: 2 }}
-          InputProps={readOnly}
+          variant='standard'
+          sx={{ m: 2 }}
+          InputProps={ readOnly }
           label={rAttrLabel}
           defaultValue={dateToMUI(entityAttrValue)}
           name={rattrName}
+          InputLabelProps={{ shrink: true }} 
         />
       );
       break;
@@ -32,7 +34,7 @@ export default function EntityField ({attribute}) {
         <TextField
           size='small'
           variant='standard'
-          sx={{display: 'block', my: 2 }}
+          sx={{display: 'block', m: 2 }}
           label={rAttrLabel}
           defaultValue={entityAttrValue}
           InputProps={readOnly}
@@ -48,7 +50,7 @@ export default function EntityField ({attribute}) {
           maxRows={4}
           size='small'
           variant='standard'
-          sx={{display: 'block', my: 2 }}
+          sx={{display: 'block', m: 2 }}
           label={rAttrLabel}
           defaultValue={entityAttrValue}
           InputProps={readOnly}

@@ -39,18 +39,18 @@ export default function EntityDetail() {
     !loadingEntity && <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography sx={{mb: 2}} variant="h4" component="h1">{curEntity?.rentity_type_label}</Typography>
+          <Typography sx={{m: 2}} variant="h4" component="h1">{curEntity?.rentity_type_label}</Typography>
           <Divider />
         </Grid>
         <Grid item xs={9} borderRadius={2} border={0}>
-          <Box sx={{p: 2, overflowY:"auto"}} height={450}>
+          <Box sx={{px: 2, overflowY:"auto" }} height={450}>
             <form id='formEntityDetail'>
               <EntityDetailBody entity={curEntity} />
             </form>
           </Box>
         </Grid>
         <Grid item xs={3} borderRadius={2} border={0}>
-          <Typography sx={{mb: 2}} variant="h5" component="h2">Связаные карточки</Typography>
+          <Typography sx={{mb: 2, ml: 2}} variant="h5" component="h2">Связаные карточки</Typography>
           <Box sx={{ overflowY: "auto"}} height={450}>
             <LinkCard attribute={{ entity_id: 40, rentity_type_label: "Заявка", rentity_type_name: "request" }}/>
             <LinkCard attribute={{ entity_id: 87, rentity_type_label: "Кандидат", rentity_type_name: "candidate" }}/>
@@ -62,6 +62,5 @@ export default function EntityDetail() {
         rentityTypeName={rEntityTypeName}
       />
     </Box>
-
   )
 };

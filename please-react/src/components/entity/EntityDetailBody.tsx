@@ -7,5 +7,5 @@ export default function EntityDetailBody ({entity}) {
   
   const listFields = entityAttr.map((attribute) => <EntityField key={attribute?.entity_attr_id} attribute={attribute} />)
 
-  return <>{listFields}</>;
+  return <Box display="flex" flexWrap="wrap">{listFields}</Box>
 };
