@@ -23,5 +23,9 @@ export type CustomFilter = {
 };
 
 export const getFilter = async (rentity_filter_name:string) =>
-	(await axios.get<CustomFilter[]>(`http://localhost:8000/api/v2/filter/${rentity_filter_name}`)).data;
+	(await axios.get<CustomFilter[]>(`http://92.53.119.132/api/v2/filter/${rentity_filter_name}`, {
+		headers: {
+			Authorization: `Token fortythousandmonkeysputbananainmyarsh`,
+		}
+	})).data;
 

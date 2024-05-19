@@ -1,5 +1,5 @@
 import { Box, Grid, Typography, Chip, Stack, Button, ButtonGroup, Divider, TextField } from "@mui/material";
-import EntityField from "../../components/entity/EntityField.tsx"
+import EntityField from "../entity/EntityField.tsx"
 
 
 export default function EntityDetailBody ({entity}) {

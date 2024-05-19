@@ -14,6 +14,8 @@ import Settings from './pages/settings';
 import UserIFO from './pages/user';
 import { observer } from "mobx-react-lite";
 import Page404 from './pages/Page404'
+import StageAction from "./components/stages/stageAction.tsx";
+import React from "react";
 
 const  App:React.FC = observer(() => {
 	const {SideBar} = useStores()
@@ -41,6 +43,7 @@ const  App:React.FC = observer(() => {
 										<Route path='/references' element={<References></References>}/>
 										<Route path='/settings' element={<Settings></Settings>}/>
 										<Route path='/user' element={<UserIFO></UserIFO>}/>
+										<Route path='/stage-action' element={<StageAction/>}/>
 										<Route path='*' element={<Page404></Page404>}/>
 									</Routes> 	
 								</Box>
